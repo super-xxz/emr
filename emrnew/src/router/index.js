@@ -52,7 +52,7 @@ const routes = [
   {
   	path:'/doctor',
   	component:Doctormain,
-  	redirect:'/createrecord',//重定向到createrecord
+  	redirect:'/createrecord',
   	children:[
   		//子路由
   		{path:'/createrecord',component:CreateRecord}, //新建病历
@@ -65,7 +65,7 @@ const routes = [
   {
   	path:'/patient',
   	component:Patientmain,
-  	redirect:'/myrecord',//重定向到myrecord
+  	redirect:'/myrecord',
   	children:[
   		//子路由
   		{path:'/myrecord',component:MyRecord}, //查看病历
@@ -81,7 +81,7 @@ const routes = [
   {
   	path:'/manager',
   	component:ManagerMain,
-  	redirect:'/system',//重定向到system
+  	redirect:'/system',
   	children:[
   		//子路由
   		{path:'/system',component:System}, //系统数据概览

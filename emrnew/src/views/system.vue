@@ -1,4 +1,3 @@
-<!--系统数据-->
 <template>
   <div class="user-center-wrapper clear-fix">
     <el-card shadow="always" :body-style="{padding: '50px'}">
@@ -84,8 +83,8 @@ export default {
     }
   }
 }
-// modify
+
 .el-card {
- background: linear-gradient(to right, #87c0bd, #9ee9af)
+  background: linear-gradient(to right, #87c0bd, #9ee9af)
 }
 </style>

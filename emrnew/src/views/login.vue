@@ -5,7 +5,7 @@
 			<div class="form-box-left" :class="{ 'form-box-left': true, 'transformed': moved }">
 				<div class="guide-register-box">
 					<div class="max-welcome-title">欢迎回来</div>
-					<div class="min-welcome-title">与我们保持联系</div><!--修改-->
+					<div class="min-welcome-title">与我们保持联系</div>
 					<div class="login-btn" @click="toggleAnimation">{{ moved ? '登录' : '注册' }}</div>
 				</div>
 
@@ -93,7 +93,7 @@
 							</el-col>
 						</el-row>
 						<el-form-item label-width="80px" prop="date" label="生日：">
-							<el-date-picker class="custom-radius-input" v-model="registerForm.date" type="date" :picker-options="pickerOptions"
+							<el-date-picker v-model="registerForm.date" type="date" :picker-options="pickerOptions"
 								placeholder="请选择出生日期"></el-date-picker>
 						</el-form-item>
 						<el-form-item label-width="80px" prop="sex" label="性别：">
@@ -128,11 +128,11 @@
 						<el-form-item prop="name" label="姓名：" label-width="80px">
 							<el-input class="custom-radius-input" v-model="registerDoctorForm.name" type="text" auto-complete="off" placeholder="请输入姓名" />
 						</el-form-item>
-						<el-form-item prop="phone" label="电话：" label-width="80px">
+						<el-form-item class="custom-radius-input" prop="phone" label="电话：" label-width="80px">
 							<el-input class="custom-radius-input" v-model="registerDoctorForm.phone" type="text" auto-complete="off"
 								placeholder="请输入手机号" />
 						</el-form-item>
-						<el-form-item prop="password" label="密码：" label-width="80px">
+						<el-form-item class="custom-radius-input" prop="password" label="密码：" label-width="80px">
 							<el-input class="custom-radius-input" v-model="registerDoctorForm.password" type="password" auto-complete="off"
 								placeholder="请输入密码" />
 						</el-form-item>
@@ -213,25 +213,24 @@ import Clipboard from 'clipboard';
 import SecurityCode from "@/components/securityCode.vue";
 
 export default {
-	//组件声明：
-	components: { SecurityCode },//引入一个名为SecurityCode的子组件，用于显示验证码
-	name: 'Login',//定义组件名为Login
+	components: { SecurityCode },
+	name: 'Login',
 	data() {
 		return {
 			Background,
 			//验证码
-			identifyCodeType: "1234567890", //定义验证类型 1.数字 2.字母，验证码类型字符串，用于生成验证码内容
-			identifyCode: "",//实际生成的验证码
+			identifyCodeType: "1234567890", //定义验证类型 1.数字 2.字母
+			identifyCode: "",
 			inputCode: "", //text框输入的验证码
 			loginForm: {
 				phone: '',
 				password: '',
-			},//包含电话号码和密码的登录表单对象，用于收集用户登录信息
-			type: 'doctor',//用户类型，这里暂时只定义了'doctor'
+			},
+			type: 'doctor',
 			loginRules: {
 				phone: [{ required: true, trigger: 'blur', message: '电话不能为空' }],
 				password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
-			},//登录表单验证规则，用于校验电话号码和密码是否为空
+			},
 			loading: false,
 			form: [],
 			dialogTableVisible2: false,
@@ -243,8 +242,8 @@ export default {
 				disabledDate(time) {
 					return time.getTime() > Date.now();
 				},
-			},//datepicker组件的选项，这里限制了用户不能选择未来的日期
-			registerForm: {//包含姓名、电话、密码、出生日期和性别的注册表单对象，针对普通用户（非医生）注册
+			},
+			registerForm: {
 				name: '',
 				phone: '',
 				password: '',
@@ -263,7 +262,7 @@ export default {
 			visiblePatient: false,
 
 
-			registerDoctorForm: {//针对医生用户注册的表单对象，除了常规信息外还包括医院、科室和资质码等字段
+			registerDoctorForm: {
 				name: '',
 				phone: '',
 				password: '',
@@ -279,7 +278,7 @@ export default {
 				office: [{ required: true, trigger: 'blur', message: '科室不能为空' }],
 				checking: [{ required: true, trigger: 'blur', message: '资质码不能为空' }],
 			},
-			privateKeyDoctor: '',//存储医生用户注册成功后的私钥信息
+			privateKeyDoctor: '',
 			visibleDoctor: false,
 			userReg: false,
 			docReg: false
@@ -327,7 +326,7 @@ export default {
 
 		copyprivateKeyDoctor() {
 			// 创建 Clipboard 实例
-			const clipboard = new Clipboard('.el-button', {	//	轻量js库
+			const clipboard = new Clipboard('.el-button', {
 				text: () => this.privateKeyDoctor // 设置复制的内容
 			});
 			// 复制成功后的回调函数
@@ -351,7 +350,7 @@ export default {
                 console.log('个人用户注册====>',valid);
 				if (valid) {
 					_this.loading = true;
-					axios.post('http://localhost:8181/patient/patientregister', _this.registerForm)//将_this.registerForm数据发送至该接口
+					axios.post('http://localhost:8181/patient/patientregister', _this.registerForm)
 						.then(function (resp) {
 							console.log(resp);
 							_this.loading = false;
@@ -359,7 +358,7 @@ export default {
 								_this.$alert('用户已存在，请登录', '提示', {
 									confirmButtenText: '确定'
 								})
-								_this.$router.replace({ path: '/login' })//跳转至登录页面
+								_this.$router.replace({ path: '/login' })
 							}
 							if (resp.data.code == -2) {
 								_this.$alert('注册失败，请稍后再试', '提示', {
@@ -367,7 +366,7 @@ export default {
 								})
 							}
 							if (resp.data.code === 0) {
-								_this.privateKey = resp.data.//本地变量接受返回的私钥数据
+								_this.privateKey = resp.data.data
 								_this.visiblePatient = true
 							}
 						})
@@ -395,9 +394,9 @@ export default {
 			});
         },
         
-        handleDialogClose(done) {//处理对话框关闭的回调函数
+        handleDialogClose(done) {
             this.toggleAnimation()
-			// this.$router.push({ path: '/login' }); // 跳转到登录页面,push是新增一个页面，可以退回到上一个页面
+			// this.$router.push({ path: '/login' }); // 跳转到登录页面
 			done(); // 必须调用 done()，否则弹窗将无法关闭
 		},
 		toggleAnimation() {
@@ -446,7 +445,6 @@ export default {
 					this.loading = true
 					let _this = this
 					if (_this.type == 'doctor') {
-						//{params: _this.loginForm} 指定了要将 _this.loginForm 对象的属性转换为查询字符串参数并附带在请求URL后面,但get方法不安全，一般像登录中使用的密码不应该附加在url后面
 						axios.get('http://localhost:8181/doctor/login', { params: _this.loginForm }).then(function (resp) {
 							//console.log(resp)
 							_this.loading = false
@@ -492,7 +490,7 @@ export default {
 	},
 
 	mounted() {
-		this.refreshCode();//刷新验证码，将其返回给identifyCode
+		this.refreshCode();
 	},
 }
 </script>
@@ -529,17 +527,26 @@ export default {
 }
 
 
+
 .login-wrapper {
 	width: 100vw;
 	height: 100vh;
 	background: linear-gradient(to right, #ceffeb, #ede3dc);
+  @keyframes float-up-down {
 
-	@keyframes float-up-down {//浮动
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0); }
-}
+    //浮动
+    0% {
+      transform: translateY(0);
+    }
 
+    50% {
+      transform: translateY(-20px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
 	.form-box {
 		padding: 0 !important;
 		margin: 0 auto;
@@ -551,19 +558,26 @@ export default {
 		overflow: hidden;
 		background-color: transparent;
 
-		 animation-name: float-up-down;//浮动
-         animation-duration: 6s; 
-         animation-iteration-count: infinite;
-         animation-direction: alternate;
+    animation-name: float-up-down; //浮动
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 
-		 .custom-radius-input .el-input__inner {
-          border-radius: 30px; /* 根据需求调整数值 */
-}
+    .custom-radius-input .el-input__inner {
+      border-radius: 30px;
+    }
 
 
 
-		.form-box-left {
+
+    .form-box-left {
+
+
+
 			background: linear-gradient(to bottom right, #679290, #93e6a7);
+
+
+
 			position: absolute;
 			transition: transform 0.5s ease;
 			transform: translateX(0);

@@ -35,13 +35,13 @@
         size="medium"
 		:loading="loading"
       >
-        <el-table-column prop="id" label="病历编号" align="center" sortable />
-		<el-table-column prop="createtime" label="创建时间" align="center" sortable />
+        <el-table-column prop="id" label="病历编号" align="center"sortable />
+		<el-table-column prop="createtime" label="创建时间" align="center"sortable />
         <el-table-column prop="hospital" label="就诊医院" align="center" />
         <el-table-column prop="office" label="就诊科室" align="center" />
         <el-table-column label="操作" align="center" width="200">
 			<template slot-scope='scope'>
-				<el-button size="mini" @click='view(scope.row)'>查看</el-button>
+				<el-button size="mini"@click='view(scope.row)'>查看</el-button>
 			</template>
 		</el-table-column>
 		<el-table-column label="状态" align="center" width="200">
@@ -285,9 +285,7 @@ export default {
 </script>
 
 <style lang="less">
-
 .table-classic-wrapper {
-	
   .el-card {
     min-height: 656px;
   }

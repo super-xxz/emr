@@ -1,4 +1,3 @@
-<!--资质码生成-->
 <template>
 	<div style="margin-left: 300px;">
 		<div class="checking">
@@ -55,7 +54,7 @@
 				console.log(_this.createForm)
 				axios.post('http://localhost:8181/checking/create',_this.createForm).then(function (resp){
 					if(resp.data.code==0){
-						_this.$alert('新建成功! 资质码为：'+ resp.data.data,'',{//modify
+						_this.$alert('新建成功! 校验码为：'+ resp.data.data,'',{
 							confirmButtonText:'确定',
 						})
 						_this.$refs[formName].resetFields()

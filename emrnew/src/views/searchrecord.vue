@@ -41,7 +41,7 @@
         size="medium"
       >
         <el-table-column prop="id" label="病历编号" align="center"/>
-		<el-table-column prop="createtime" label="创建时间" align="center" sortable />
+		<el-table-column prop="createtime" label="创建时间" align="center"sortable />
         <el-table-column prop="name" label="姓名" align="center"/>
         <el-table-column prop="phone" label="手机" align="center" />
         <el-table-column prop="sex" label="性别" align="center">
@@ -58,7 +58,7 @@
 					<el-button size="mini" disabled type="success">已授权</el-button>
 				</p>
 				<p v-else>
-					<el-button size="mini" @click='apply(scope.row)' type="danger">申请授权</el-button>
+					<el-button size="mini"@click='apply(scope.row)' type="danger">申请授权</el-button>
 				</p>
 			</template>
 		</el-table-column>

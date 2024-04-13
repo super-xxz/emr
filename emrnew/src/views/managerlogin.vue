@@ -6,14 +6,13 @@
       </div>
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" label-width="0px" class="login-form">
         <el-form-item prop="phone">
-          <el-input class="custom-radius-input" v-model="loginForm.phone" type="text" auto-complete="off" placeholder="请输入手机号" prefix-icon="el-icon-user" />
+          <el-input v-model="loginForm.phone" type="text" auto-complete="off" placeholder="请输入手机号" prefix-icon="el-icon-user" />
         </el-form-item>
         <el-form-item prop="password">
-          <el-input class="custom-radius-input" v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
+          <el-input v-model="loginForm.password" type="password" auto-complete="off" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleLogin" />
         </el-form-item>
 		<div style="display: flex; align-items: center;">
 		  <el-input
-		    class="custom-radius-input"
 		    style="width: 180px; margin-right: 10px;"
 		    type="text"
 		    v-model="inputCode"
@@ -25,7 +24,7 @@
 		  </div>
 		</div>
         <el-form-item>
-          <el-button :loading="loading" size="small" type="primary" class="custom-radius" style="width:100%; margin-top: 30px;" @click.native.prevent="handleLogin"><!--修改边框-->
+          <el-button :loading="loading" size="small" type="primary" style="width:100%; margin-top: 30px;" @click.native.prevent="handleLogin">
             <span v-if="!loading">登 录</span>
             <span v-else>登 录 中...</span>
           </el-button>
@@ -97,7 +96,7 @@ export default {
 		  // 刷新验证码
 		  this.refreshCode();
 		  return;
-		} //前端验证码验证，容易被绕过，一起提交给后端比较可靠
+		} 
 		this.$refs.loginForm.validate((valid) => {
 		    if (valid) {
 				this.loading =true
@@ -127,48 +126,48 @@ export default {
 
 <style lang="less">
 .table {
-   width: 200px;
+  width: 200px;
 }
 .login-wrapper {
-    display: flex;
-	justify-content: center;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to right, #ceffeb, #ede3dc);
-	@keyframes float-up-down {//浮动
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0); }
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to right, #ceffeb, #ede3dc);
+  @keyframes float-up-down {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+  }
   .form-box {
-	background: linear-gradient(to right, #f0fff5, #f7f8f1) !important;//修改边框
-	border-radius: 10px !important;
+    background: linear-gradient(to right, #f0fff5, #f7f8f1) !important;
+    border-radius: 10px !important;
     width: 320px;
     padding: 15px 30px 20px;
     background: #f4f4f4;
     border-radius: 4px;
     box-shadow: 0 15px 30px 0 rgba(0, 0, 1, .1);
-	margin-left: -50%;
+    margin-left: -50%;
 
-	animation-name: float-up-down;//浮动
-    animation-duration: 6s; 
+    animation-name: float-up-down;
+    animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 
-	.custom-radius {                     //边框圆角
-  border-radius: 50px !important;
-}
-  .custom-radius-input .el-input__inner {
-  border-radius: 30px; /* 根据需求调整数值 */
-}
+    .custom-radius {
+      border-radius: 50px !important;
+    }
+    .custom-radius-input .el-input__inner {
+      border-radius: 30px;
+    }
 
     .form-title {
       margin: 0 auto 35px;
       text-align: center;
       color: #678f8d;
-	  font-weight: bold;
+      font-weight: bold;
       font-size: 18px;
       letter-spacing: 2px;
     }

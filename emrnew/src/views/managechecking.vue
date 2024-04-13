@@ -1,8 +1,7 @@
-<!--资质码管理-->
 <template>
   <div class="table-classic-wrapper">
     <el-card shadow="always"
-               <!-- 查询栏 -->
+      <!-- 查询栏 -->
       <el-form
         ref="listQuery"
         :inline="true"
@@ -38,7 +37,7 @@
 		<el-table-column prop="checking" label="资质码" align="center" />
         <el-table-column label="操作" align="center" width="200">
 			<template slot-scope='scope'>
-				<el-button size="mini" @click='resetChecking(scope.row)'>重置</el-button>
+				<el-button size="mini"@click='resetChecking(scope.row)'>重置</el-button>
 			</template>
 		</el-table-column>
       </el-table>
@@ -77,23 +76,23 @@ export default {
 	  pageSize: 10,
       // 数据总条数
       total: 0,
-      // 表格数据数组，存储查询数据结果
+      // 表格数据数组
       tableData: [],
 	  // 加载提示
 	  loading: true, 
     }
   },
-  created() {//生命周期钩子，初始化为1页
+  created() {
   	const _this = this
 	_this.listQuery.page = 1
 	axios.get('http://localhost:8181/checking/checkingsearch',{params:_this.listQuery}).then(function(resp){
 		console.log(resp)
-		_this.tableData = resp.data.data.data//请求到的数据用来填充这俩
+		_this.tableData = resp.data.data.data
 		_this.total = resp.data.data.total 
 	})
   },
   methods: {
-	//页面切换，更新当前页数并重新发起请求
+	//页面切换
 	page(currentPage){
 		const _this = this
 		_this.listQuery.page = _this.currentPage
@@ -156,7 +155,7 @@ export default {
 		.catch(error => {
 			console.error('重置资质码请求出错:', error);
 			this.$message.error('请求出错，请稍后再试');
-		});//当POST请求发生错误时，捕获异常并打印错误信息到控制台
+		});
 	},
 	
   }
